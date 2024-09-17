@@ -21,7 +21,7 @@ class PostFactory extends Factory
         return [
             'user_id' => fake()->randomElement([1, 2]),
             'title' => rtrim($title, '.'),
-            'content' => fake()->paragraph,
+            'content' => fake()->paragraph(2),
         ];
     }
 }

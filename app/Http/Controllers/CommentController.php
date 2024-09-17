@@ -32,6 +32,7 @@ class CommentController extends Controller
     {
         $this->authorize('update', $comment);
         $validated = $request->validated();
+
         $comment->update($validated);
         return redirect()->route('posts.show', $comment->post_id)->with('success', 'posts.comment_updated');
     }

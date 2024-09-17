@@ -31,13 +31,13 @@
                     <small class="fs-6 fw-light text-muted"
                         title="{{ $comment->updated_at->toDateTimeString() }}">{{ $comment->updated_at->diffForHumans() }}</small>
                 </div>
-                @if ($editingComment ?? '')
-                    <form method="POST" action="{{ route('comments.update', $comment->id) }}">
+                @if ($editingComment ?? false)
+                    <form action="{{ route('comments.update', $comment->id) }}" method="post">
                         @method('put')
                         @csrf
                         <div class="mb-3">
-                            <textarea name="comment_content" class="form-control" id="content" rows="3">{{ $comment->content ?? '' }}</textarea>
-                            @error('comment_content')
+                            <textarea name="content" class="form-control" id="content" rows="3">{{ $comment->content ?? '' }}</textarea>
+                            @error('content')
                                 <div class="d-block fs-6 text-danger mt-1">{{ $message }}</div>
                             @enderror
                         </div>
@@ -55,12 +55,12 @@
                         <span id="options" class="text-secondary fs-8 fw-bolder"
                             style="letter-spacing: .2vw;cursor: pointer;">...</span>
                         <div id="options-card" class="bg-primary card overflow-hidden d-none position-absolute"
-                            style="top: 3rem;right: -9rem">
+                            style="top: 3rem;right: -6rem">
                             <div class="card-body pt-3">
                                 <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
                                     <li class="nav-item">
                                         <a class="nav-link "
-                                            href="{{ route('comments.edit', [$comment->id, $post->id]) }}">{{ __('posts.edit') }}</a>
+                                            href="{{ route('comments.edit', $comment->id) }}">{{ __('posts.edit') }}</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link">
 
@@ -69,7 +69,7 @@
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit"
-                                                    class="nav-link">{{ __('posts.delete') }}</button>
+                                                    class="nav-link px-0">{{ __('posts.delete') }}</button>
                                             </form>
                                         </a>
                                     </li>
