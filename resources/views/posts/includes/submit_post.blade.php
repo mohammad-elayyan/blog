@@ -4,8 +4,14 @@
         <div class="row">
             <form action={{ route('posts.store') }} method="POST">
                 @csrf
+                <div class="mb-2">
+                    <input type="text" name="title" class="form-control" placeholder="title">
+                    @error('title')
+                        <div class="d-block fs-6 text-danger mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
                 <div class="mb-3">
-                    <textarea name="content" class="form-control" id="content" rows="3"></textarea>
+                    <textarea name="content" class="form-control" id="content" rows="3" placeholder="content"></textarea>
                     @error('content')
                         <div class="d-block fs-6 text-danger mt-1">{{ $message }}</div>
                     @enderror
